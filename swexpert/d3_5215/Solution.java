@@ -1,4 +1,4 @@
-package swexpert.d3_5215;
+package d3_5215;
 
 import java.io.*;
 import java.util.*;
@@ -9,7 +9,7 @@ public class Solution {
 	
 	public static int getMax(int totalCalorie) {
 		if(totalCalorie > limit) {
-			return;
+			return 0;
 		}
 		
 		return 0;

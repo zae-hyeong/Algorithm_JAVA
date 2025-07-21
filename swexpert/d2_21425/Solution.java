@@ -1,4 +1,4 @@
-package swexpert.d2_21425;
+package d2_21425;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

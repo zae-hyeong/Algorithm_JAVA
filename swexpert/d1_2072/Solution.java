@@ -3,7 +3,7 @@ package d1_2072;
 import java.io.*;
 import java.util.*;
 
-public class Solution_d1_2072_홀수만더하기_서울_8반_박재형 {
+public class Solution {
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

@@ -1,4 +1,4 @@
-package d2_21425;
+package swexpert.d2_1859;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -11,27 +11,23 @@ public class Solution {
 		String input = br.readLine();
 		final int N = Integer.parseInt(input);
 
-		int count, a, b, n;
+		long total;
+		int max;
 
 		for (int loop = 1; loop <= N; loop++) {
+			input = br.readLine();
 			int[] arr = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-			count = 0;
-			a = arr[0] > arr[1] ? arr[0] : arr[1];
-			b = arr[0] <= arr[1] ? arr[0] : arr[1];
-			n = arr[2];
+			total = 0;
+			max = arr[arr.length - 1];
 
-			while (true) {
-				if (a > n) break;
-				
-				b = a + b;
-				count++;
-				if (b > n) break;
-				
-				a = a + b;
-				count++;
-				if (a > n) break;
+			for (int i = arr.length - 2; i >= 0; i--) {
+				if (arr[i] > max) {
+					max = arr[i];
+				} else {
+					total += (max - arr[i]);
+				}
 			}
-			System.out.println(count);
+			System.out.format("#%d %d\n", loop, total);
 		}
 		br.close();
 	}

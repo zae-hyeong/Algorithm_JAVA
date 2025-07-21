@@ -1,4 +1,4 @@
-package d1_2072;
+package swexpert.d1_2072;
 
 import java.io.*;
 import java.util.*;

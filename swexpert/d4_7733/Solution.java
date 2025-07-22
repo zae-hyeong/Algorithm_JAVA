@@ -13,7 +13,6 @@ public class Solution {
 	}
 	
 	public static void dfs(int i, int j, int day) {
-//		System.out.printf("i: %d, j: %d\n", i, j);
 
 		visited[i][j] = true;
 		
@@ -32,7 +31,7 @@ public class Solution {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		System.setIn(new FileInputStream("res/input.txt"));
+//		System.setIn(new FileInputStream("res/input.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
 

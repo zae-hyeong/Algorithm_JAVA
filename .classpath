@@ -6,5 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="swexpert"/>
+	<classpathentry kind="src" path="programmers"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,33 +1,44 @@
 package d5_19118;
 
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Solution {
 	static int N = 0;
 	static int[] arr = null;
 	static int result = 0;
 
-	static int crashBuildings(int curIdx, int nextIdx, int crashed) {
-		if (nextIdx == N)
-			return crashed;
+	static int crashedBuildings() {
+		int[] count = new int[N];
+		count[0] = 1;
+		int flag;
+		
+		for (int i = 1; i < N; i++) {
+			flag = 0;
+			for (int j = i - 1; j >= 0; j--) {
+				if (arr[i] <= arr[j]) continue;
+				
+				flag = 1;
+				if(count[i] < count[j] + 1)
+					count[i] = count[j] + 1;
+			}
+			if(flag == 0) count[i] = 1;
+		}
+		
+//		System.out.println(Arrays.toString(count));
+		
+		int max = 0;
+		for (int i = 0; i < N; i++) {
+			if(max < count[i]) max = count[i]; 
+		}
 
-		if (arr[curIdx] < arr[nextIdx])
-			return crashBuildings(nextIdx, nextIdx + 1, crashed);
-
-		int val1 = -1;
-		// 나를 부순다
-		if (curIdx >= 1)
-			val1 = crashBuildings(curIdx - 1, nextIdx, crashed + 1);
-
-		// 다음걸 부순다
-		int val2 = crashBuildings(curIdx, nextIdx + 1, crashed + 1);
-
-		return val1 == -1 ? val2 : Math.min(val1, val2);
+		return N - max;
 	}
 
 	public static void main(String[] args) throws Exception {
-		System.setIn(new FileInputStream("res/input.txt"));
+		System.setIn(new FileInputStream("res/test.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
 		StringTokenizer st;
@@ -44,7 +55,7 @@ public class Solution {
 				arr[i] = Integer.parseInt(st.nextToken());
 			}
 
-			result = crashBuildings(0, 1, 0);
+			result = crashedBuildings();
 
 			sb.append("#").append(tc).append(" ").append(result).append("\n");
 		}

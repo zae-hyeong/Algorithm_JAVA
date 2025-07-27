@@ -18,35 +18,7 @@ public class Solution {
 		int count = 0;
 
 		while (true) {
-			System.out.println(Arrays.toString(arr));
-			count = 0;
-
-			for (int i = 0; i < N; i++) {
-				if (smallest == arr[i])
-					continue;
-
-				count++;
-				int a = arr[i] / 2;
-				int b = arr[i] - a; // b >= a
-
-				if (a < smallest) {
-					if (b == smallest) {
-						arr[i] = b;
-					} else {
-						arr[i] = a;
-						smallest = a;
-					}
-				} else {
-					arr[i] = a;
-				}
-			}
 			
-			totalCount += count;
-
-			if (count == 0) {
-				System.out.println(Arrays.toString(arr));
-				return totalCount;
-			}
 		}
 
 	}

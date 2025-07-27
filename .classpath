@@ -8,5 +8,6 @@
 	<classpathentry kind="src" path="swexpert"/>
 	<classpathentry kind="src" path="programmers"/>
 	<classpathentry kind="src" path="baekjoon"/>
+	<classpathentry kind="src" path="basic-algorithm"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

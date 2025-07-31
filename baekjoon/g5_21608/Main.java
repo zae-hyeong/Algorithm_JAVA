@@ -93,21 +93,27 @@ public class Main {
 				emptyArr[i][j] = nearEmpty;
 			}
 		}
+		int totalPoint = 0;
 
-		StringTokenizer st;
 		int id;
-		for (int i = 0; i < numOfStudent; i++) {
-			st = new StringTokenizer(br.readLine());
+		String input = "";
+		favor.put(0, new HashSet<>());
+		for (int i = 1; i <= numOfStudent; i++) {
+			input = br.readLine();
+			if (input == null)
+				break;
+
+			StringTokenizer st = new StringTokenizer(input, " ");
 			id = Integer.parseInt(st.nextToken());
 
 			favor.put(id, new HashSet<>());
-			for (int j = 0; j < 4; j++) {
+			while (st.hasMoreTokens()) {
 				favor.get(id).add(Integer.parseInt(st.nextToken()));
 			}
 			putStudent(id);
 		}
 
-		int totalPoint = 0;
+		
 
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
@@ -116,6 +122,7 @@ public class Main {
 		}
 
 		System.out.println(totalPoint);
+//		for (HashMap.Entry<Integer, HashSet<Integer>> h : favor.entrySet()) System.out.println(h.toString());
 //		for (int[] a : arr) System.out.println(Arrays.toString(a));
 
 		br.close();

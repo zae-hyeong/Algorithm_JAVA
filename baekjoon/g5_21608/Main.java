@@ -3,7 +3,11 @@ package g5_21608;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.StringTokenizer;
 
 public class Main {
 	static int[][] arr;
@@ -47,12 +51,16 @@ public class Main {
 			for (int j = 0; j < N; j++) {
 				if (arr[i][j] > 0)
 					continue;
+				
 				point = calcPoint(id, i, j);
 				if (point > max) {
 					x = j;
 					y = i;
 					max = point;
 				} else if (point == max && emptyArr[i][j] > emptyArr[y][x]) {
+					x = j;
+					y = i;
+				} else if (y == 0 && x == 0 && arr[0][0] > 0) {
 					x = j;
 					y = i;
 				}
@@ -111,9 +119,9 @@ public class Main {
 				favor.get(id).add(Integer.parseInt(st.nextToken()));
 			}
 			putStudent(id);
+//			for (int[] a : arr) System.out.println(Arrays.toString(a));
+//			System.out.println("-----------------------------------");
 		}
-
-		
 
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
@@ -123,7 +131,7 @@ public class Main {
 
 		System.out.println(totalPoint);
 //		for (HashMap.Entry<Integer, HashSet<Integer>> h : favor.entrySet()) System.out.println(h.toString());
-//		for (int[] a : arr) System.out.println(Arrays.toString(a));
+		for (int[] a : arr) System.out.println(Arrays.toString(a));
 
 		br.close();
 	}

@@ -11,33 +11,37 @@ public class Main {
 	static WeightGraph graph;
 
 	public static int dijkstra(int start, int end) {
-		PriorityQueue<int[]> heap = new PriorityQueue<>(Comparator.comparingInt(v -> v[1]));
 		int[] weights = new int[N + 1];
+		PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.comparingInt(v -> weights[v]));
+		boolean[] visited = new boolean[N+1];
 
 		for (int i = 1; i <= N; i++) {
 			weights[i] = Integer.MAX_VALUE;
 		}
 		weights[start] = 0;
-		heap.add(new int[] {start, 0}); // node 번호, weight
+		pq.add(start); // node 번호, weight
 		
-		int [] curNode;
-		while(!heap.isEmpty()) {
-			curNode = heap.poll();
+		int curNode;
+		while(!pq.isEmpty()) {
+			curNode = pq.poll();
 			
-			for(int[] nearNode: graph.get(curNode[0])) {
-				if(weights[nearNode[0]] > weights[curNode[0]] + nearNode[1]) {
-					weights[nearNode[0]] = weights[curNode[0]] + nearNode[1];
-					heap.add(nearNode);
+			if(visited[curNode]) continue;  //속도 최적화
+			visited[curNode] = true;
+			
+			for(int[] nearNode: graph.get(curNode)) {
+				if(weights[nearNode[0]] > weights[curNode] + nearNode[1]) {
+					weights[nearNode[0]] = weights[curNode] + nearNode[1];
+					pq.add(nearNode[0]);
 				}
 			}
-			System.out.println(curNode[0] + Arrays.toString(weights));
+//			System.out.println(curNode + Arrays.toString(weights));
 		}
 
 		return weights[end];
 	}
 
 	public static void main(String[] args) throws Exception {
-		System.setIn(new FileInputStream("./baekjoon/g5_1916/input.txt"));
+//		System.setIn(new FileInputStream("./baekjoon/g5_1916/input.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = null;
 

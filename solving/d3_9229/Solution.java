@@ -40,13 +40,11 @@ public class Solution {
 				if (arr[front] + arr[end] > M)
 					end--;
 				else {
-					if (front + 1 >= end || arr[front + 1] + arr[end] > M)
-						break;
+					result = Math.max(result, arr[front] + arr[end]);
 
 					front++;
 				}
 			}
-			result = (front >= end) ? -1 : (arr[front] + arr[end]);
 
 			sb.append("#").append(tc).append(" ").append(result).append("\n");
 		}

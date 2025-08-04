@@ -3,12 +3,12 @@ package d3_9229;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.PriorityQueue;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Solution {
 	static int N, M;
-	static PriorityQueue<Integer> pq;
+	static int[] arr;
 
 	public static void main(String[] args) throws Exception {
 		System.setIn(new FileInputStream("./solving/d3_9229/input.txt"));
@@ -25,27 +25,31 @@ public class Solution {
 			M = Integer.parseInt(st.nextToken());
 
 			st = new StringTokenizer(br.readLine());
-			pq = new PriorityQueue<>((o1, o2) -> Integer.compare(o2, o1));
+
+			arr = new int[N];
 			for (int i = 0; i < N; i++) {
-				pq.add(Integer.parseInt(st.nextToken()));
+				arr[i] = Integer.parseInt(st.nextToken());
 			}
 
-			int a = pq.poll();
-			int b = pq.poll();
+			Arrays.sort(arr);
 
-			for (int i = 0; i < N - 1; i++) {
-				if ((a + b) <= M) {
-					result = a + b;
-					break;
+			int front = 0;
+			int end = N - 1;
+
+			while (front < end) {
+				if (arr[front] + arr[end] > M)
+					end--;
+				else {
+					if (front + 1 >= end || arr[front + 1] + arr[end] > M)
+						break;
+
+					front++;
 				}
-
-				a = b;
-				if(!pq.isEmpty()) b = pq.poll();
 			}
+			result = (front >= end) ? -1 : (arr[front] + arr[end]);
 
 			sb.append("#").append(tc).append(" ").append(result).append("\n");
 		}
-
 		System.out.println(sb.toString());
 		br.close();
 	}

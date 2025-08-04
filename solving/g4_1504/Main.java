@@ -33,6 +33,18 @@ public class Main {
 	static int N, E;
 	static Graph g;
 
+	static int calcPath(int... arr) {
+		int totalCost = 0, cost;
+		for (int i = 0; i < 3; i++) {
+			cost = dijkstra(arr[i], arr[i + 1]);
+			if (cost == Integer.MAX_VALUE)
+				return -1;
+			totalCost += cost;
+		}
+
+		return totalCost;
+	}
+
 	static int dijkstra(int start, int end) {
 		boolean[] visited = new boolean[N + 1];
 		int[] minDistance = new int[N + 1];
@@ -48,12 +60,12 @@ public class Main {
 				break;
 			if (visited[cur])
 				continue;
-			
+
 			visited[cur] = true;
 
 			for (int[] nextInfo : g.get(cur)) {
 				int next = nextInfo[0];
-				
+
 				int weight = nextInfo[1];
 
 				if (minDistance[cur] + weight < minDistance[next]) {
@@ -62,7 +74,6 @@ public class Main {
 				}
 			}
 		}
-//		System.out.println(Arrays.toString(minDistance));
 		return minDistance[end];
 	}
 
@@ -78,60 +89,17 @@ public class Main {
 
 		for (int i = 0; i < E; i++) {
 			st = new StringTokenizer(br.readLine());
-			g.connect(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()),
-					Integer.parseInt(st.nextToken()));
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int w = Integer.parseInt(st.nextToken());
+            g.connect(a, b, w);
 		}
-
-		int result1 = 0, result2 = 0;
 
 		st = new StringTokenizer(br.readLine());
 		int u = Integer.parseInt(st.nextToken());
 		int v = Integer.parseInt(st.nextToken());
-		
-		int tmp = dijkstra(1, u);
-		if (tmp == Integer.MAX_VALUE) {
-			System.out.println(-1);
-			return;
-		}
-		result1 += tmp;
-		
-		tmp = dijkstra(u, v);
-		if (tmp == Integer.MAX_VALUE) {
-			System.out.println(-1);
-			return;
-		}
-		result1 += tmp;
-		
-		tmp = dijkstra(v, N);
-		if (tmp == Integer.MAX_VALUE) {
-			System.out.println(-1);
-			return;
-		}
-		result1 += tmp;
-		
-		tmp =0;
-		tmp = dijkstra(1, v);
-		if (tmp == Integer.MAX_VALUE) {
-			System.out.println(-1);
-			return;
-		}
-		result2 += tmp;
-		
-		tmp = dijkstra(v, u);
-		if (tmp == Integer.MAX_VALUE) {
-			System.out.println(-1);
-			return;
-		}
-		result2 += tmp;
-		
-		tmp = dijkstra(u, N);
-		if (tmp == Integer.MAX_VALUE) {
-			System.out.println(-1);
-			return;
-		}
-		result2 += tmp;
-		
-		System.out.println(Math.min(result1, result2));
+
+		System.out.println(Math.min(calcPath(1, u, v, N), calcPath(1, v, u, N)));
 		br.close();
 	}
 }

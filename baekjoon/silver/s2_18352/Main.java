@@ -1,4 +1,4 @@
-package s2_18352;
+package silver.s2_18352;
 
 import java.io.*;
 import java.util.*;

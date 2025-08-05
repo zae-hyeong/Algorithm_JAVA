@@ -24,7 +24,8 @@ class Graph {
 public class Main {
 	static int N, M, K, START, count;
 	static Graph g;
-	static StringBuilder sb;
+	static ArrayList<Integer> resultArr;
+	
 	
 	static int bfsFrom(int a) {
 		
@@ -43,7 +44,8 @@ public class Main {
 			visited[node] = true;
 			
 			if(depth ==K) {
-				sb.append(node).append("\n");
+				resultArr.add(node);
+				
 				count++;
 			} else if (depth > K) {
 				continue;
@@ -61,7 +63,7 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		System.setIn(new FileInputStream("./solving/s2_18352/input.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		N = Integer.parseInt(st.nextToken());
@@ -70,6 +72,8 @@ public class Main {
 		START = Integer.parseInt(st.nextToken());
 		
 		g = new Graph(N);
+		
+		resultArr = new ArrayList<>();
 		
 		int a, b;
 		for (int i = 0; i < M; i++) {
@@ -82,10 +86,16 @@ public class Main {
 		
 		bfsFrom(START);
 		
-		if (count > 0)
+		resultArr.sort((o1, o2) -> Integer.compare(o1, o2));
+		
+		if (count > 0) {
+			for (Integer n : resultArr)
+				sb.append(n).append("\n");
 			System.out.println(sb.toString());
-		else 
+		}
+		else
 			System.out.println(-1);
+		
 		
 		br.close();
 	}

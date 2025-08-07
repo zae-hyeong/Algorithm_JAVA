@@ -1,4 +1,4 @@
-package d3_6808;
+package d123.d3_6808;
 
 import java.io.*;
 import java.util.*;
@@ -34,15 +34,15 @@ public class Solution {
 	}
 
 	public static void main(String[] args) throws IOException {
+		System.setIn(new FileInputStream("./solving/d3_6808/input.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
 
 		int T = Integer.parseInt(br.readLine());
 
-		StringBuilder sb = new StringBuilder();
-
+		StringTokenizer st;
 		for (int tc = 1; tc <= T; tc++) {
-			sb.append("#").append(tc).append(" ");
-			StringTokenizer st = new StringTokenizer(br.readLine());
+			st = new StringTokenizer(br.readLine());
 
 			lose = 0;
 			win = 0;
@@ -56,7 +56,7 @@ public class Solution {
 
 			pickCard(0, 0);
 
-			sb.append(win).append(" ").append(lose).append("\n");
+			sb.append("#").append(tc).append(" ").append(win).append(" ").append(lose).append("\n");
 		}
 
 		System.out.print(sb);

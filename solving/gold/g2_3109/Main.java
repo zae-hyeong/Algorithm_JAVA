@@ -23,8 +23,7 @@ public class Main {
 			int ny = startY + d;
 			int nx = startX + 1;
 			
-			if (!isValid(ny, nx))
-				continue;
+			if (!isValid(ny, nx)) continue;
 			if (arr[ny][nx] == '.') {
 				arr[ny][nx] = 'x';
 				if (dfsFrom(ny, nx)) {
@@ -48,11 +47,7 @@ public class Main {
 		for (int i = 0; i < R; i++)
 			arr[i] = br.readLine().toCharArray();
 
-		int count = 0;
-		for (int i = 0; i < R; i++) {
-			if (dfsFrom(i, 0))
-				count++;
-		}
+		for (int i = 0; i < R; i++) dfsFrom(i, 0);
 
 		System.out.println(count);
 		br.close();

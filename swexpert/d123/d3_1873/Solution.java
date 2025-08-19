@@ -1,4 +1,4 @@
-package d3_1873;
+package d123.d3_1873;
 
 import java.io.*;
 import java.util.*;

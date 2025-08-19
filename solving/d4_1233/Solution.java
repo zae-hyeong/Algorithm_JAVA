@@ -3,6 +3,7 @@ package d4_1233;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Solution {
@@ -15,16 +16,18 @@ public class Solution {
 		StringTokenizer st;
 		StringBuffer sb = new StringBuffer();
 
-		for (int tc = 1; tc <= 10; tc++) {
+		final int TC = Integer.parseInt(br.readLine());
+		for (int tc = 1; tc <= TC; tc++) {
 			int result = -1;
 			N = Integer.parseInt(br.readLine());
-
+			arr = new int[N];
+			
+			st = new StringTokenizer(br.readLine());
 			for (int i = 0; i < N; i++) {
-				st = new StringTokenizer(br.readLine());
-				
+				arr[i] = Integer.parseInt(st.nextToken());
 			}
 
-			
+			System.out.println(Arrays.toString(arr));
 
 			sb.append("#").append(tc).append(" ").append(result).append("\n");
 		}

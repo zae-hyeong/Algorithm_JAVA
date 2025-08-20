@@ -4,33 +4,38 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-	static int N;
+	static int N, totalSum;
 	static int[] nums;
-	static ArrayList<Integer>[] g;
-	static int min, totalSum, sum;
+	static Set<Integer>[] g;
 	
-	static boolean[] visited;
-	static void bfsFrom(int start) {
-		ArrayDeque<Integer> q= new ArrayDeque<>();
-		q.add(start);
-		visited[start] = true;
-		sum = 0;
+	void bfs(int start) {
+		ArrayDeque<Integer> q = new ArrayDeque<>();
+		int[] groupNums = new int[N + 1];
+		q.addFirst(start);
 		
 		while(!q.isEmpty()) {
 			int cur = q.pollFirst();
-			sum+= nums[cur];
-			if(min > Math.abs(totalSum - sum)) System.out.println(min +":"+(totalSum - sum));
-			min = Math.min(min, Math.abs(totalSum - sum));
 			
-			
-			for (int near: g[cur]) {
-				if(visited[near]) continue;
+			for (Iterator<Integer> next = g[cur].iterator(); next.hasNext();) {
+				if(group.contains(next)) {
+					
+				}
 				
-				visited[near] = true;
-				q.add(near);
 			}
 		}
-		System.out.println(Arrays.toString(visited));
+	}
+	
+	static Set<Integer> group;
+	static void subset(int idx) {
+		if(idx > N) {
+			//TODO
+			return;
+		}
+		
+		group.add(idx);
+		subset(idx + 1);
+		group.remove(idx);
+		subset(idx + 1);
 	}
 	
 	public static void main(String[] args) throws Exception {
@@ -39,13 +44,12 @@ public class Main {
 		
 		N = Integer.parseInt(br.readLine());
 		nums = new int[N + 1];
-		g = new ArrayList[N + 1];
+		g = new Set[N + 1];
 		
 		for (int i = 0; i <= N; i++) 
-			g[i] = new ArrayList<>();
+			g[i] = new HashSet<>();
 		
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		totalSum = 0;
 		
 		for (int i = 1; i <= N; i++) {
 			nums[i] = Integer.parseInt(st.nextToken());
@@ -60,11 +64,10 @@ public class Main {
 			}
 		}
 		
-		min = Integer.MAX_VALUE;
-		for (int i = 1; i <= N; i++) {
-			visited = new boolean[N+1];
-			bfsFrom(i);
-		}
+		group = new HashSet<>();
+		
+		int min = Integer.MAX_VALUE;
+		
 		
 		System.out.println(min);
 	}

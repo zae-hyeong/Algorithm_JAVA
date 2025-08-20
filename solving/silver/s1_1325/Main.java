@@ -25,23 +25,22 @@ class Graph {
 public class Main {
 	static int N, M;
 	static Graph g;
-	static int[] cntArr;
 	static boolean[] visited;
-
+	static int[] cnt;
+	static int count = 0;
+	
 	static void dfs(int n) {
-		visited[n] = true;
-
 		for (int next : g.get(n)) {
-			if (visited[next])
-				continue;
+			if (visited[next]) continue;
 
-			cntArr[next]++;
+			visited[next] = true;
+			count++;
 			dfs(next);
 		}
 	}
 
 	public static void main(String[] args) throws Exception {
-//		System.setIn(new FileInputStream("./solving/silver/s1_1325/input.txt"));
+		System.setIn(new FileInputStream("./solving/silver/s1_1325/input.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
 
@@ -50,6 +49,7 @@ public class Main {
 		M = Integer.parseInt(st.nextToken());
 
 		g = new Graph(N);
+		cnt  = new int[N +1];
 
 		int from, to;
 		for (int i = 0; i < M; i++) {
@@ -58,24 +58,21 @@ public class Main {
 			from = Integer.parseInt(st.nextToken());
 			to = Integer.parseInt(st.nextToken());
 
-			g.connect(from, to);
+			g.connect(to, from);
 		}
 
-		cntArr = new int[N + 1];
-
-		for (int i = 1; i <= N; i++) {
-			visited = new boolean[N + 1];
-			dfs(i);
-			System.out.println(Arrays.toString(cntArr));
-		}
-		
 		int max = 0;
 		for (int i = 1; i <= N; i++) {
-			max = Math.max(max, cntArr[i]);
+			visited = new boolean[N + 1];
+			count = 1;
+			visited[i] = true;
+			dfs(i);
+			cnt[i] = count;
+			max = Math.max(max, cnt[i]);
 		}
 		
 		for (int i = 1; i <= N; i++) {
-			if(cntArr[i] == max) sb.append(i).append(" ");
+			if(cnt[i] == max) sb.append(i).append(" ");
 		}
 		
 		System.out.println(sb.toString());

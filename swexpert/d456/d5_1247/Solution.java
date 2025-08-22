@@ -9,10 +9,8 @@ public class Solution {
 	static int[] order;
 	static int[][] customers;
 
-	static void calc() {
-		int y, x, ny, nx, sum = 0;
-		y = start[0];
-		x = start[1];
+	static int calc() {
+		int y= start[0], x= start[1], ny, nx, sum = 0;
 
 		for (int i = 0; i < N; i++) {
 			ny = customers[order[i]][0];
@@ -22,20 +20,21 @@ public class Solution {
 
 			x = nx;
 			y = ny;
+			if (sum >= result) return sum;
 		}
 		
 		ny = dest[0];
 		nx = dest[1];
 
 		sum += Math.abs(ny - y) + Math.abs(nx - x);
-		result = Math.min(result, sum);
+		return sum;
 	}
 
 	static boolean[] v;
 
 	static void perm(int n) {
 		if (n == N) {
-			calc();
+			result = Math.min(result, calc());
 			return;
 		}
 
@@ -62,14 +61,8 @@ public class Solution {
 			N = Integer.parseInt(br.readLine());
 			st = new StringTokenizer(br.readLine());
 
-			int y, x;
-			y = Integer.parseInt(st.nextToken());
-			x = Integer.parseInt(st.nextToken());
-			start = new int[] { y, x };
-
-			y = Integer.parseInt(st.nextToken());
-			x = Integer.parseInt(st.nextToken());
-			dest = new int[] { y, x };
+			start = new int[] { Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()) };
+			dest = new int[] { Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()) };
 
 			customers = new int[N][2];
 			for (int i = 0; i < N; i++) {

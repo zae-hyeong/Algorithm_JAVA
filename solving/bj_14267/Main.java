@@ -5,9 +5,7 @@ import java.io.*;
 
 public class Main {
 	static int N, M;
-	static int[] nums;
-	static int[] result;
-	
+	static int[] nums, result;
 
 	static List<Integer>[] g;
 
@@ -29,14 +27,13 @@ public class Main {
 		nums = new int[N + 1];
 		result = new int[N + 1];
 		g = new List[N + 1];
-		for (int i = 1; i <= N; i++) {
+		
+		for (int i = 1; i <= N; i++) 
 			g[i] = new ArrayList<>();
-		}
 
 		st = new StringTokenizer(br.readLine());
 		int parent, startIdx = 0;
 		for (int i = 1; i <= N; i++) {
-//			parents[i] = Integer.parseInt(st.nextToken());
 			parent = Integer.parseInt(st.nextToken());
 			if (parent == -1) {
 				startIdx = i;
@@ -51,7 +48,7 @@ public class Main {
 			n = Integer.parseInt(st.nextToken());
 			w = Integer.parseInt(st.nextToken());
 
-			nums[n] = w;
+			nums[n] += w;
 		}
 		
 		dfs(startIdx, nums[startIdx]);
@@ -60,7 +57,6 @@ public class Main {
 		for (int i = 1; i <= N; i++) {
 			sb.append(result[i]).append(" ");
 		}
-//		System.out.println(Arrays.toString(result));
 
 		System.out.println(sb.toString());
 		br.close();

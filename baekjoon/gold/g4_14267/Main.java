@@ -1,4 +1,4 @@
-package bj_14267;
+package gold.g4_14267;
 
 import java.util.*;
 import java.io.*;

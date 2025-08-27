@@ -1,4 +1,4 @@
-package bj_17472;
+package gold.g1_17472;
 
 import java.util.*;
 import java.io.*;
@@ -9,39 +9,40 @@ public class Main {
 	static int[][] g; // g[출발섬][도착섬] = 거리
 	static int[] dy = { 1, 0, -1, 0 };
 	static int[] dx = { 0, 1, 0, -1 };
-	
+
 	static int prim() {
-		boolean[] v = new boolean[numOfLand+1];
-		int[]  prim = new int[numOfLand + 1];
+		boolean[] v = new boolean[numOfLand + 1];
+		int[] prim = new int[numOfLand + 1];
 		Arrays.fill(prim, Integer.MAX_VALUE);
-		int cnt = 0;
 		int mst = 0;
-		
-		PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2)-> Integer.compare(o1[1], o2[1]));
-		pq.add(new int[] {1, 0});  // [node, cost]
-		
-		while(!pq.isEmpty()) {
+
+		PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> Integer.compare(o1[1], o2[1]));
+		pq.add(new int[] { 1, 0 }); // [node, cost]
+
+		while (!pq.isEmpty()) {
 			int cur[] = pq.poll();
-//			System.out.println(Arrays.toString(cur));
-			
-			if(cur[1]>prim[cur[0]]) continue;
-			if(v[cur[0]]) continue;
-			
+
+			if (cur[1] > prim[cur[0]]) continue;
+			if (v[cur[0]]) continue;
+
 			v[cur[0]] = true;
 			mst += cur[1];
-			
-			if(cnt++ == numOfLand - 1) break;
-			
-			for(int near = 1; near <= numOfLand; near++) {
-				if(near == cur[0]) continue;
-				
-				if(!v[near] && prim[near] > g[cur[0]][near]) {
+
+			for (int near = 1; near <= numOfLand; near++) {
+				if (near == cur[0])
+					continue;
+
+				if (!v[near] && prim[near] > g[cur[0]][near]) {
 					prim[near] = g[cur[0]][near];
-					pq.add(new int [] {near, prim[near]});
+					pq.add(new int[] { near, prim[near] });
 				}
 			}
 		}
+
+		for (int i = 1; i <= numOfLand; i++) 
+			if (!v[i]) return -1;
 		
+
 		return mst;
 	}
 
@@ -74,8 +75,10 @@ public class Main {
 							break;
 
 //						System.out.println(map[i][j] + " : " + map[y][x] + " >> " + length);
-						g[map[i][j]][map[y][x]] = Math.min(g[map[i][j]][map[y][x]], length - 1);
-//						최적화 가능 -> 줄일 수 있음
+						int a = map[i][j], b = map[y][x];
+						g[a][b] = Math.min(g[a][b], length - 1);
+						g[b][a] = Math.min(g[b][a], length - 1);
+						break;
 					}
 				}
 			}
@@ -151,9 +154,8 @@ public class Main {
 		for (int i = 1; i <= numOfLand; i++) {
 			Arrays.fill(g[i], Integer.MAX_VALUE);
 			g[i][i] = 0;
-			g[i][0] = 0;
 		}
-		
+
 		makeMinBridge();
 
 //		for (int[] gg : g) System.out.println(Arrays.toString(gg));

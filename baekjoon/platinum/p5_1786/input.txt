@@ -1,2 +1,6 @@
 ABC ABCDAB ABCDABCDABDE
 ABCDABD
+
+//라빈 카프 반례
+gGD
+FF

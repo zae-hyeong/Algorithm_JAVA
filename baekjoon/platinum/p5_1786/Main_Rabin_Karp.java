@@ -4,13 +4,14 @@ import java.util.*;
 import java.io.*;
 
 public class Main_Rabin_Karp {
+
 	static String str, targetStr;
 	static int[] p;
 
 	static int makeHash(String str, int n) {
 		int hash = 0;
 		for (int i = 0; i < n; i++) {
-			hash = (hash * 7);
+			hash = hash << 1;
 			hash += str.charAt(i);
 		}
 
@@ -22,11 +23,9 @@ public class Main_Rabin_Karp {
 
 	static void KMP(String dest, String find) {
 		int fLength = find.length();
-		int dLength = dest.length();
-		if (dLength < fLength)
-			return;
-
 		int findHash = makeHash(find, fLength);
+
+		int dLength = dest.length();
 		int destHash = makeHash(dest, fLength);
 
 		int loop = dLength - fLength + 1;
@@ -37,9 +36,9 @@ public class Main_Rabin_Karp {
 				sb.append(i + 1).append(" ");
 			}
 
-			System.out.println("i : " + i + " / destHash : " + destHash + " / findHash : " + findHash);
-			destHash -= (Math.pow(7, fLength - 1) * dest.charAt(i));
-			destHash = (destHash * 7);
+//				System.out.println("i : " + i + " / destHash : " + destHash + " / findHash : " + findHash);
+			destHash -= (Math.pow(2, fLength - 1) * dest.charAt(i));
+			destHash = destHash << 1;
 			if (i + fLength < dLength)
 				destHash += dest.charAt(i + fLength);
 		}
@@ -51,7 +50,7 @@ public class Main_Rabin_Karp {
 		str = br.readLine();
 		targetStr = br.readLine();
 
-//		System.out.println(Arrays.toString(table));
+//			System.out.println(Arrays.toString(table));
 		KMP(str, targetStr);
 
 		System.out.println(count);

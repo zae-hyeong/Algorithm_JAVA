@@ -15,11 +15,10 @@ public class Solution {
 	static int simulation(int stairNum) {
 		// 계단에 배정된 사람들의 도착시각(=거리) 수집
 		ArrayList<Integer> arrive = new ArrayList<>();
-		for (int i = 1; i <= numOfPerson; i++) 
-			if (targetStair[i] == stairNum) 
+		for (int i = 1; i <= numOfPerson; i++)
+			if (targetStair[i] == stairNum)
 				arrive.add(distances[stairNum][i]);
-			
-		
+
 		if (arrive.isEmpty())
 			return 0;
 
@@ -36,10 +35,10 @@ public class Solution {
 		for (int a : arrive) {
 			int ready = a + 1; // 계단 입구 도착 후 1분 뒤에 탑승 가능
 
-			// 이미 3명이 내려가는 중이면, 가장 먼저 끝나는 사람 한 명이 끝날 때까지 기다림
+			// 이미 3명이 내려가는 중이면, 가장 먼저 끝나는 사람 한 명이 언제 나오는지 확인
 			if (heap.size() == 3) {
 				int earliestEnd = heap.poll();
-				// 이 사람이 끝나야 내가 계단에 올라탈 수 있음
+
 				ready = Math.max(ready, earliestEnd);
 			}
 

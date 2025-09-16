@@ -1,4 +1,4 @@
-package bj.bj_11437;
+package gold.g3_11437;
 
 import java.util.*;
 import java.io.*;
@@ -29,11 +29,14 @@ public class Main {
 		return a;
 	}
 
-	static void findDepth(int node, int d) {
+	static boolean[] v;
+	static void findDepth(int node, int p, int d) {
+		v[node] = true;
 		depth[node] = d;
+		parent[node] = p;
 
 		for (int next : g[node]) {
-			findDepth(next, d + 1);
+			if(!v[next]) findDepth(next, node, d + 1);
 		}
 	}
 
@@ -55,14 +58,12 @@ public class Main {
 			st = new StringTokenizer(br.readLine());
 			a = Integer.parseInt(st.nextToken());
 			b = Integer.parseInt(st.nextToken());
-			min = Math.min(a, b);
-			max = Math.max(a, b);
 
-			g[min].add(max);
-			parent[max] = min;
+			g[a].add(b);
+			g[b].add(a);
 		}
-
-		findDepth(1, 1);
+		v = new boolean[N + 1];
+		findDepth(1, 0, 1);
 //		System.out.println(Arrays.toString(depth));
 
 		M = Integer.parseInt(br.readLine());

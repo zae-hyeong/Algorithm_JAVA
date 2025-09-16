@@ -8,14 +8,15 @@ public class Main {
 	static String[][] dp;
 
 	static String lcs(int i, int j) {
-		if (i == 0 || j == 0 || str1[i - 1] != str2[j - 1])
+		if (i < 0 || j < 0 || str1[i] != str2[j])
 			return "";
 
-		if (dp[i - 1][j - 1] != null) {
-			return dp[i - 1][j - 1]+ str1[i - 1];
+		if (dp[i][j] != null) {
+			return dp[i][j];
 		}
 
-		return dp[i][j] = lcs(i - 1, j - 1) + str1[i - 1];
+		dp[i][j] = Character.toString(str1[i]);
+		return lcs(i - 1, j - 1) + str1[i];
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -25,13 +26,13 @@ public class Main {
 		str1 = br.readLine().toCharArray();
 		str2 = br.readLine().toCharArray();
 
-		dp = new String[str1.length + 1][str2.length + 1];
+		dp = new String[str1.length][str2.length];
 
 		String maxStr = "";
 
-		for (int i = 1; i <= str1.length; i++) {
-			for (int j = 1; j <= str2.length; j++) {
-				if (str1[i - 1] == str2[j - 1]) {
+		for (int i = 0; i < str1.length; i++) {
+			for (int j = 0; j < str2.length; j++) {
+				if (str1[i] == str2[j]) {
 					String s = lcs(i, j);
 
 					if (maxStr.length() < s.length()) {

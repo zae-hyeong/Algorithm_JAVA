@@ -12,5 +12,6 @@
 	<classpathentry kind="src" path="solving"/>
 	<classpathentry kind="src" path="LeetCode"/>
 	<classpathentry kind="src" path="ready"/>
+	<classpathentry kind="src" path="original"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,4 +1,4 @@
-package gold.g5_2470;
+package gold.g5_2470_두용액;
 
 import java.util.*;
 import java.io.*;

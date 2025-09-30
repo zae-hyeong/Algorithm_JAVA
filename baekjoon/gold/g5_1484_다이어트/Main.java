@@ -1,4 +1,4 @@
-package gold.g5_1484;
+package gold.g5_1484_다이어트;
 
 import java.util.*;
 import java.io.*;

@@ -1,4 +1,4 @@
-package bj.bj_9253;
+package platinum.p3_9253;
 
 import java.util.*;
 import java.io.*;

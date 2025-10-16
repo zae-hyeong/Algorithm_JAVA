@@ -1,4 +1,4 @@
-package bj.bj_9249;
+package bronze.b3_9249;
 
 import java.io.*;
 import java.util.*;

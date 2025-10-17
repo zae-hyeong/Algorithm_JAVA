@@ -107,7 +107,7 @@ public class Main {
 		return target;
 	}
 
-	static void bfsCustomer(Car car) {
+	static boolean bfsCustomer(Car car) {
 		for (int i = 0; i < N; i++)
 			for (int j = 0; j < N; j++)
 				v[i][j] = false;
@@ -136,7 +136,7 @@ public class Main {
 							car.fuel += (cur[2] + 1) * 2;
 						}
 						car.target = -1;
-						return;
+						return true;
 					}
 
 					v[ny][nx] = true;
@@ -144,6 +144,7 @@ public class Main {
 				}
 			}
 		}
+		return false;
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -196,21 +197,21 @@ public class Main {
 //		for (int[] a : map) System.out.println(Arrays.toString(a));
 
 		for (int i = 0; i < M; i++) {
-//			System.out.println("###################");
+			System.out.println("###################");
 			int target = bfsFromTaxi(car);
 
-//			System.out.println("target : " + target + " / fuel : " + car.fuel);
-//			System.out.println("cur car pos : " + car.y + ", " + car.x);
-			if (car.fuel <= 0) {
+			System.out.println("target : " + target + " / fuel : " + car.fuel);
+			System.out.println("cur car pos : " + car.y + ", " + car.x);
+			if (target == Integer.MAX_VALUE ||car.fuel <= 0) {
 				System.out.println(-1);
 				return;
 			}
 
-			bfsCustomer(car);
-//			System.out.println("----------");
-//			System.out.println("next / fuel : " + car.fuel);
-//			System.out.println("cur car pos : " + car.y + ", " + car.x);
-			if (car.fuel <= 0) {
+			boolean flag = bfsCustomer(car);
+			System.out.println("----------");
+			System.out.println("next / fuel : " + car.fuel);
+			System.out.println("cur car pos : " + car.y + ", " + car.x);
+			if (!flag || car.fuel <= 0) {
 				System.out.println(-1);
 				return;
 			}

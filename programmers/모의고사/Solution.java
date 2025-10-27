@@ -20,7 +20,7 @@ public class Solution {
 		
 		int maxVal = Arrays.stream(scores).max().getAsInt();
 		
-		ArrayList<Integer> answer = new ArrayList();
+		ArrayList<Integer> answer = new ArrayList<>();
 		for(int j = 0; j < 3; j++) {
 			if (maxVal == scores[j])
 				answer.add(j + 1);

@@ -14,16 +14,25 @@ public class Main {
         return 0 <= y && y < N && 0 <= x && x < N;
     }
 
-    static void dfs(int y, int x, int depth) {
-        dist[y][x] = depth;
+    static int dfs(int y, int x) {
+        if (dist[y][x] > 0)
+            return dist[y][x];
 
+        dist[y][x] = 1;
+
+        int ny, nx;
         for (int d = 0; d < 4; d++) {
-            int ny = y + dy[d];
-            int nx = x + dx[d];
-            if (inBound(ny, nx) && map[y][x] > map[ny][nx] && dist[ny][nx] < depth + 1) {
-                dfs(ny, nx, depth + 1);
+            ny = y + dy[d];
+            nx = x + dx[d];
+
+            if (!inBound(ny, nx))
+                continue;
+
+            if (map[y][x] < map[ny][nx]) {
+                dist[y][x] = Math.max(dist[y][x], dfs(ny, nx) + 1);
             }
         }
+        return dist[y][x];
     }
 
     public static void main(String[] args) throws Exception {
@@ -33,7 +42,6 @@ public class Main {
         N = Integer.parseInt(br.readLine());
         map = new int[N][N];
         dist = new int[N][N];
-        PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> o2[2]-o1[2]); // [y, x, 값]
 
         StringTokenizer st;
         for (int i = 0; i < N; i++) {
@@ -41,33 +49,19 @@ public class Main {
 
             for (int j = 0; j < N; j++) {
                 map[i][j] = Integer.parseInt(st.nextToken());
-                pq.add(new int[]{i, j, map[i][j]});
             }
         }
 
         br.close();
 
-        
-        while(!pq.isEmpty()) {
-            int[] cur = pq.poll();
-            int y = cur[0];
-            int x = cur[1];
-            
-            if(dist[y][x] > 0) continue;
-
-            dfs(y, x, 1);
-
-            
-        }
-
         int max = 0;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                max = Math.max(max, dist[i][j]);
+                max = Math.max(max, dfs(i, j));
             }
         }
 
-        // for(int[] d: dist) System.out.println(Arrays.toString(d));
+        for(int[] d: dist) System.out.println(Arrays.toString(d));
         System.out.println(max);
     }
 }

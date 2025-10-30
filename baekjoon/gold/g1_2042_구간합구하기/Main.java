@@ -1,4 +1,4 @@
-package gold.g1_2042;
+package gold.g1_2042_구간합구하기;
 
 import java.util.*;
 import java.io.*;

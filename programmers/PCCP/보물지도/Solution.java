@@ -1,3 +1,5 @@
+package PCCP.보물지도;
+
 import java.util.*;
 
 class Solution {

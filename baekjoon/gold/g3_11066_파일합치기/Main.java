@@ -33,7 +33,7 @@ public class Main {
 					for(int k = i; k < i + range; k++) {
 						dp[i][i + range] = Math.min(
 								dp[i][i + range], 
-								dp[i][k] + dp[k + 1][i + range] + sum[i+range] - sum[i - 1]);
+								dp[i][k] + dp[k + 1][i + range] + sum[i + range] - sum[i - 1]);
 					}
 				}
 			}

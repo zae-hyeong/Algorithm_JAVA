@@ -6,7 +6,7 @@ import java.io.*;
 public class Main {
 	static int W, H;
 	static int[][] map;
-	static boolean[][] v;
+	static int[][] dp;
 	
 	static int max;
 	
@@ -16,18 +16,18 @@ public class Main {
 	static int ny, nx;
 	static void dfs(int y, int x, int depth) {
 //		System.out.format("y : %d, x : %d, map[y][x] : %d, depth : %d\n", y, x, map[y][x], depth);
-		if(v[y][x]) {
-			System.out.println(-1);
-			System.exit(0);
+		
+		if(dp[y][x] != 0) {
+			if(dp[y][x] < depth) {
+				System.out.println(-1);
+				System.exit(0);
+			} else { 
+				return;
+			}
 		}
 		
-		v[y][x] = true;
+		dp[y][x] = depth;
 		max = Math.max(max, depth);
-		
-		if(map[y][x] == -1) {
-			v[y][x] = false;
-			return;
-		}
 		
 		for(int i = 0; i < 4; i++) {
 			ny = y + dy[i] * map[y][x];
@@ -38,7 +38,7 @@ public class Main {
 			}
 		}
 		
-		v[y][x] = false;
+		dp[y][x] = 0;
 	}
 	
 	public static void main(String[] args) throws Exception {
@@ -49,7 +49,7 @@ public class Main {
 		H = Integer.parseInt(st.nextToken());
 		W = Integer.parseInt(st.nextToken());
 		map = new int[H][W];
-		v = new boolean[H][W];
+		dp = new int[H][W];
 		
 		String tmp;
 		char c;

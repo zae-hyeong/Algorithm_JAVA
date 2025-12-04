@@ -1,4 +1,4 @@
-package gold.g3_7512;
+package gold.g3_7512_연속하는소수의합;
 
 import java.io.*;
 import java.util.*;
@@ -29,7 +29,7 @@ public class Main {
 	}
 
 	public static void main(String[] args) throws Exception {
-		System.setIn(new FileInputStream("solving/gold/g3_7512/input.txt"));
+		System.setIn(new FileInputStream("solving/gold/g3_7512_연속하는소수의합/input.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuffer sb = new StringBuffer();
 		StringTokenizer st;
@@ -50,9 +50,9 @@ public class Main {
 			int front = 0;
 			int rear = 0;
 			int sum = 0;
-			while(true) {
-				
-			}
+//			while(true) {
+//				
+//			}
 			
 			int result = 0;
 			

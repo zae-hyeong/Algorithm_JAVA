@@ -2,7 +2,7 @@ package gold.g2_19238_스타트택시;
 
 import java.io.*;
 import java.util.*;
-
+/*
 class Customer implements Comparable<Customer> {
 	int startY, startX, destY, destX;
 
@@ -44,7 +44,7 @@ class Car {
 	}
 }
 
-public class Main {
+public class Main2 {
 	static int N, M, FUEL;
 	static final int WALL = -1249071209;
 	static int[][] map;
@@ -99,6 +99,7 @@ public class Main {
 			}
 		}
 
+//		if()tar
 		car.y = targetY;
 		car.x = targetX;
 		car.fuel -= minDist;
@@ -210,7 +211,7 @@ public class Main {
 			boolean flag = bfsCustomer(car);
 			System.out.println("----------");
 			System.out.println("next / fuel : " + car.fuel);
-			System.out.println("cur car pos : " + car.y + ", " + car.x);
+			System.out.println("cur car pos : " + car.y + ", " + car.x + " / falg : " + flag);
 			if (!flag || car.fuel <= 0) {
 				System.out.println(-1);
 				return;
@@ -223,3 +224,4 @@ public class Main {
 	}
 
 }
+*/

@@ -128,7 +128,7 @@ public class Main {
 			int y2 = Integer.parseInt(st.nextToken());
 
 			checkGroups(y1, x1, y2, x2, groupId);
-			putGroups();
+			//putGroups();
 		}
 
 		br.close();

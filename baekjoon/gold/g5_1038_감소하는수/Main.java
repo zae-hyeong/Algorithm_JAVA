@@ -1,7 +1,6 @@
-package bj.bj_1038;
+package gold.g5_1038_감소하는수;
 
 import java.util.*;
-import java.io.*;
 
 public class Main {
 	static int N;

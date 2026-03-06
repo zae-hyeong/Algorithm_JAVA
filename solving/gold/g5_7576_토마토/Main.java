@@ -1,4 +1,4 @@
-
+package gold.g5_7576_토마토;
 
 import java.util.*;
 import java.io.*;

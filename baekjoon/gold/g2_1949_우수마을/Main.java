@@ -10,28 +10,35 @@ public class Main {
 	static int[][] dp;
 	static int[] population;
 	
-	static void dfs(int parent) {	
-		for(int child: graph[parent]) {
+	static void dfs(int me) {
+		v[me] = true;
+		boolean isLeaf = true;
+
+		// 나를 끔 
+		for(int child: graph[me]) {
 			if(v[child]) continue;
 			
-			v[child] = true;
+			isLeaf = false;
 			
-			// 부모 꺼짐 + 영향 없음 -> 자식은 무조건 켜야 함
-			dp[child][2] = Math.max(dp[child][2], dp[parent][0] + population[child]);
+			if(dp[child][0] == 0 && dp[child][1] == 0) dfs(child);
 			
-			// 부모 꺼짐 + 영향 있음 + 자식 켬
-			dp[child][2] = Math.max(dp[child][2], dp[parent][0] + population[child]);
-			
-			// 부모 꺼짐 + 영향 있음 + 자식 끔
-			dp[child][0] = Math.max(dp[child][0], dp[parent][1]);
-			
-			// 부모 켜짐 -> 자식은 무조건 꺼야 함
-			dp[child][0] = Math.max(dp[child][0], dp[parent][2]);
-			
-			dfs(child);
-			
-			v[child] = false;
+			dp[me][0] += Math.max(dp[child][0], dp[child][1]);
 		}
+		
+		// 나를 켬
+		dp[me][1] = population[me];
+		for(int child: graph[me]) {
+			if(v[child]) continue;
+			
+			dp[me][1] += dp[child][0];
+		}
+		
+		if(isLeaf) {
+			dp[me][0] = 0;
+			dp[me][1] = population[me];
+		}
+		
+		v[me] = false;
 	}
 	
 	public static void main(String[] args) throws Exception {
@@ -40,7 +47,7 @@ public class Main {
 		
 		N = Integer.parseInt(br.readLine());
 		v = new boolean[N + 1];
-		dp = new int[N + 1][3];
+		dp = new int[N + 1][2];
 		population = new int[N + 1];
 		graph = new List[N + 1];
 		
@@ -63,19 +70,11 @@ public class Main {
 			graph[b].add(a);
 		}
 
-		int result = 0;
-		v[1] = true;
-		dp[1][2] = population[1];
 		dfs(1);
 		
-		for(int i = 1; i <= N; i++) {
-			for(int j = 0; j < 3; j++) {
-				result = Math.max(result, dp[i][j]);
-			}
-			System.out.println(Arrays.toString(dp[i]));
-		}
+//		for(int i = 1; i <= N; i++) System.out.println(i + ": " + Arrays.toString(dp[i]));
 		
-		System.out.println(result);
+		System.out.println(Math.max(dp[1][0], dp[1][1]));
 		br.close();
 	}
 }
